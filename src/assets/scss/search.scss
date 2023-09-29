@@ -1,0 +1,43 @@
+.search{
+  background-image: url("~@/assets/search-bg.png");
+  margin-bottom: 114px;
+  padding: 92px 0;
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(#000,.5);
+    width: 100%;
+    height: 100%;
+  }
+  &__form{
+    max-width: 866px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    &:before{
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 34px;
+      transform: translate(0, -50%);
+      background-image: url("~@/assets/search.svg");
+      background-size: 100%;
+      width: 23px;
+      height: 23px;
+      z-index: 1;
+    }
+  }
+  &__input{
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 24px;
+    font-weight: 300;
+    width: 100%;
+    padding: 21px 60px 21px 40px;
+    border: none;
+    position: relative;
+  }
+}

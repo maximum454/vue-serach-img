@@ -1,0 +1,56 @@
+.header{
+  background-color: #000000;
+  &__body{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 0 36px;
+  }
+  &__logo{
+    text-decoration: none;
+    display: block;
+  }
+  &__favorite{
+    color: #FFFFFF;
+    font-size: 18px;
+    text-decoration: none;
+    position: relative;
+    &:before{
+      content: '';
+      display: inline-block;
+      background-image: url("~@/assets/like.svg");
+      background-size: 100% 100%;
+      width: 23px;
+      height: 22px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  }
+  a{
+
+  }
+  @media (max-width: 767px) {
+    margin-bottom: 40px;
+    &__body{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+    &__logo{
+      max-width: 84px;
+    }
+    &__favorite{
+      &:before{
+        width: 25px;
+        height: 23px;
+        margin-right: 0;
+      }
+      span{
+        display: none;
+      }
+    }
+  }
+}
