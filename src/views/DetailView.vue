@@ -60,7 +60,6 @@ export default {
 					return response.json();
 				})
 				.then((data) => {
-					console.log('data', data);
 					detailUrls.value = data.urls
 					detailUser.value = data.user
 					detailUserPhoto.value = data.user.profile_image

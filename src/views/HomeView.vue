@@ -12,16 +12,17 @@
 		</div>
 		<div class="search">
 			<div class="container">
-				<form action="" class="search__form">
-					<input class="search__input" type="text" placeholder="Поиск">
+				<form class="search__form" v-on:submit.prevent="searchItems()">
+					<input class="search__input" ref="titleName" type="text" placeholder="Поиск" value="">
+					<button class="search__btn" type="submit"></button>
 				</form>
 			</div>
 		</div>
 		<div class="container">
 			<ul class="list-items">
 				<li class="list-items__item" v-for="item in allItems" :key="item.id">
-					<router-link :to="{ name: 'DetailView', params: { id: item.id }}">
-						<img class="img-fluid" :src="item.urls.regular" width="473" height="440" alt="">
+					<router-link :to="{ name: 'DetailView', params: { id: item.preview_photos[0].id }}">
+						<img class="img-fluid" :src="item.preview_photos[0].urls.regular" width="473" height="440" alt="">
 					</router-link>
 				</li>
 			</ul>
@@ -33,18 +34,35 @@
 import {onMounted, ref} from 'vue'
 
 const allItems = ref([])
+const apiKey = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
+const titleName = ref('');
 
 function fetchItems() {
-	const apiley = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
-	fetch(`https://api.unsplash.com/photos?client_id=${apiley}&page=1&per_page=9`)
+	fetch(`https://api.unsplash.com/collections?client_id=${apiKey}&page=1&per_page=9`)
 		.then((response) => {
 			return response.json();
 		})
 		.then((data) => {
-			console.log('data', data);
 			allItems.value = data
 		});
 }
+
+function fetchSearch(name) {
+	fetch(`https://api.unsplash.com/search/collections?client_id=${apiKey}&page=1&per_page=9&query=${name}`)
+		.then((response) => {
+			return response.json();
+		})
+		.then((data) => {
+			allItems.value = data.results
+		});
+}
+
+function searchItems(){
+	fetchSearch(titleName.value.value);
+}
+
+
+
 
 onMounted(() => {
 	fetchItems()
@@ -65,7 +83,8 @@ onMounted(() => {
 		flex: 1 0 calc(33.3% - 30px);
 		max-width: calc(33.3% - 15px);
 		aspect-ratio: 9/6;
-
+		overflow: hidden;
+		border-radius: 8px;
 		img {
 			width: 100%;
 			height: 100%;
