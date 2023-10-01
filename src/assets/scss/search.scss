@@ -39,5 +39,10 @@
     padding: 21px 60px 21px 40px;
     border: none;
     position: relative;
+    &::placeholder{
+      color: #000000;
+      font-size: 24px;
+      font-weight: 300;
+    }
   }
 }

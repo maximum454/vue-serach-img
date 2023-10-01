@@ -1,0 +1,23 @@
+.icon {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.icon-search-light {
+  background-image: url("@/assets/search-light.svg");
+}
+.icon-download-dark {
+  background-image: url("@/assets/download-dark.svg");
+}
+.icon-like-dark {
+  background-image: url("@/assets/like-dark.svg");
+}
+.icon-maximize {
+  background-image: url("@/assets/maximize.svg");
+}
