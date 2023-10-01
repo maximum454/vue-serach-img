@@ -1,0 +1,36 @@
+.list-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    flex: 1 0 calc(33.3% - 30px);
+    max-width: calc(33.3% - 15px);
+    aspect-ratio: 9/6;
+    overflow: hidden;
+    border-radius: 8px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &__item {
+      flex: 1 0 calc(50% - 30px);
+      max-width: calc(50% - 15px);
+    }
+  }
+  @media (max-width: 767px) {
+    &__item {
+      flex: 1 0 100%;
+      max-width: 100%;
+
+    }
+  }
+}

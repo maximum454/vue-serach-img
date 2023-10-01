@@ -29,7 +29,7 @@
 						</div>
 					</div>
 					<div class="detail__control">
-						<button type="button" class="btn btn-secondary"><i class="icon icon-like-dark"></i><span>Избранное</span></button>
+						<button type="button" class="btn btn-secondary" @click="addFavorite"><i class="icon icon-like-dark"></i><span>Избранное</span></button>
 						<button type="button" class="btn btn-primary"><i class="icon icon-download-dark"></i><span>Downloand</span></button>
 					</div>
 				</div>
@@ -42,8 +42,9 @@
 	</div>
 </template>
 <script>
-import {onMounted, ref} from 'vue'
+import {computed, onMounted, ref} from 'vue'
 import router from '@/router'
+import { useStore } from 'vuex'
 
 export default {
 	name: "DetailView",
@@ -52,6 +53,9 @@ export default {
 		const detailUser = ref([])
 		const detailUrls = ref([])
 		const detailUserPhoto = ref([])
+		const store = useStore();
+
+		const detail = computed(() => store.getters.getDetail)
 
 		function fetchItemsId() {
 			const apiley = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
@@ -66,13 +70,19 @@ export default {
 				});
 		}
 
+		function addFavorite() {
+
+		}
+
 		onMounted(() => {
 			fetchItemsId()
 		})
 		return {
 			detailUrls,
 			detailUser,
-			detailUserPhoto
+			detailUserPhoto,
+			addFavorite,
+			detail
 		}
 	}
 }

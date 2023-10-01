@@ -11,15 +11,33 @@
 			</div>
 		</div>
 		<h1>Избранное</h1>
-		<list-items></list-items>
+		<div class="container">
+			<ul class="list-items">
+				<li class="list-items__item" v-for="item in allFavorites" :key="item.id">
+					<router-link :to="{ name: 'DetailView', params: { id: item.preview_photos[0].id }}">
+						<img class="img-fluid" :src="item.preview_photos[0].urls.regular" width="473" height="440" alt="">
+					</router-link>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
 <script>
-import ListItems from "@/components/ListItems";
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
 	name: "FavoritesView",
-	components: {ListItems}
+	setup() {
+		const store = useStore();
+
+		const allFavorites = computed(() => store.getters.getFavorites)
+
+		return{
+			allFavorites
+		}
+	}
 }
 </script>
 

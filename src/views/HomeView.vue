@@ -30,80 +30,38 @@
 	</div>
 </template>
 
-<script setup>
-import {onMounted, ref} from 'vue'
+<script>
+import {computed, onMounted, ref} from 'vue'
+import { useStore } from 'vuex'
 
-const allItems = ref([])
-const apiKey = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
-const titleName = ref('');
+export default {
+	name: "HomeView",
+	setup() {
+		const titleName = ref('');
+		const store = useStore();
 
-function fetchItems() {
-	fetch(`https://api.unsplash.com/collections?client_id=${apiKey}&page=1&per_page=9`)
-		.then((response) => {
-			return response.json();
+		const allItems = computed(() => store.getters.getItems)
+
+
+
+		function searchItems() {
+			store.dispatch('fetchSearch', titleName)
+		}
+
+		onMounted(() => {
+			store.dispatch('fetchItems')
 		})
-		.then((data) => {
-			allItems.value = data
-		});
+
+		return{
+			searchItems,
+			allItems
+		}
+	}
 }
 
-function fetchSearch(name) {
-	fetch(`https://api.unsplash.com/search/collections?client_id=${apiKey}&page=1&per_page=9&query=${name}`)
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			allItems.value = data.results
-		});
-}
-
-function searchItems(){
-	fetchSearch(titleName.value.value);
-}
-
-
-
-
-onMounted(() => {
-	fetchItems()
-})
 
 </script>
 
 <style scoped lang="scss">
-.list-items {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 30px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
 
-	&__item {
-		flex: 1 0 calc(33.3% - 30px);
-		max-width: calc(33.3% - 15px);
-		aspect-ratio: 9/6;
-		overflow: hidden;
-		border-radius: 8px;
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	}
-
-	@media (max-width: 1023px) {
-		&__item {
-			flex: 1 0 calc(50% - 30px);
-			max-width: calc(50% - 15px);
-		}
-	}
-	@media (max-width: 767px) {
-		&__item {
-			flex: 1 0 100%;
-			max-width: 100%;
-
-		}
-	}
-}
 </style>
