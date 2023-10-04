@@ -39,6 +39,8 @@
 				</figure>
 			</div>
 		</div>
+
+		{{detail}}
 	</div>
 </template>
 <script>
@@ -55,7 +57,7 @@ export default {
 		const detailUserPhoto = ref([])
 		const store = useStore();
 
-		const detail = computed(() => store.getters.getDetail)
+
 
 		function fetchItemsId() {
 			const apiley = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
@@ -74,7 +76,10 @@ export default {
 
 		}
 
+		const detail = computed(() => store.getters.getDetail)
+
 		onMounted(() => {
+			store.dispatch('fetchIdItem', router.currentRoute.value.params.id)
 			fetchItemsId()
 		})
 		return {

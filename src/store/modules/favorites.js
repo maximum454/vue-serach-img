@@ -418,7 +418,7 @@ export default {
     },
     mutations: {
         updateFavorites(state, favorites) {
-            state.favorites = favorites
+            state.favorites.push(favorites)
         }
     },
     actions: {

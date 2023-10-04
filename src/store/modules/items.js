@@ -9,7 +9,7 @@ export default {
         },
         getDetail(state) {
             return state.detail
-        }
+        },
     },
     mutations: {
         updateItems(state, items){
@@ -32,11 +32,17 @@ export default {
             const items = await res.json();
             ctx.commit('updateItems', items.results)
         },
-        async fetchId(ctx, id) {
+        async fetchIdItem(ctx, id) {
+            console.log('dddd', id)
             const apiKey = 'V2dimaiA8KXrAmFAZwL4Mxw8XynWpDYHpLvvXsE3TbE';
             const res = await fetch(`https://api.unsplash.com/photos/${id}?client_id=${apiKey}`)
             const items = await res.json();
-            ctx.commit('updateDetail', items)
+            let items2 = []
+
+            items2.urls = items.urls
+            items2.user = items.user
+            items2.profile = items.user.profile_image.small
+            ctx.commit('updateDetail', items2)
         }
     },
 }
